@@ -1,6 +1,5 @@
 annotated-types==0.7.0
 anyio==4.6.0
-asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1698341106958/work
 blinker==1.8.2
 cachetools==5.5.0
 certifi==2024.8.30
