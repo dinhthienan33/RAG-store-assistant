@@ -1,3 +1,4 @@
+streamlit
 annotated-types==0.7.0
 anyio==4.6.0
 blinker==1.8.2
