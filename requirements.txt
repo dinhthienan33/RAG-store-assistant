@@ -10,7 +10,8 @@ openai==1.35.3
 vertexai==1.49.0
 google-cloud-aiplatform==1.49.0
 mistralai
-fastembed==0.3.1annotated-types==0.7.0
+fastembed==0.3.1
+annotated-types==0.7.0
 anyio==4.6.0
 asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1698341106958/work
 blinker==1.8.2
