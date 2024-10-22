@@ -89,5 +89,3 @@ urllib3==2.2.3
 vertexai==1.49.0
 Werkzeug==3.0.4
 wheel==0.44.0
-win32-setctime==1.1.0
-zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1726248574750/work
