@@ -22,37 +22,8 @@ class Reflection:
         higherLevelSummariesPrompt = f"""Given a chat history and the latest user question which might reference context in the chat history, formulate a standalone question in English which can be understood without the chat history. Do NOT answer the question, just reformulate it if needed and otherwise return it as is. {historyString}
         """
 
-        print(higherLevelSummariesPrompt)
+        #print(higherLevelSummariesPrompt)
         model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(higherLevelSummariesPrompt)
     
         return response.text
-
-# Example usage
-if __name__ == "__main__":
-    api_key = "AIzaSyD7JnSPUV2_ERRN_y2MV-vA_QbJiKpwbRU"
-    reflection = Reflection(api_key=api_key)
-    
-    chat_history = [
-        {
-            "role": "assistant",
-            "parts": [{"text": "Hello, how can I help you today?"}]
-        },
-        {
-            "role": "user",
-            "parts": [{"text": "Capital of Franch"}]
-            
-        },
-        {
-            "role": "assistant",
-            "parts": [{"text": "Paris"}]
-        },
-        {
-            "role": "user",
-            "parts": [{"text": "VietNam?"}]
-        }
-    ]
-    
-    result = reflection(chat_history)
-    print("Generated Question:")
-    print(result)

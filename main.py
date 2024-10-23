@@ -1,16 +1,17 @@
 import streamlit as st
 from embeddings import SentenceTransformerEmbedding, EmbeddingConfig
-from rag.core import RAG  # Assuming the RAG class is in a file named core.py
+from rag.core import RAG
 import google.generativeai as genai
 from semantic_router import SemanticRouter, Route
 from reflection import Reflection
 from semantic_router.samples import jobSample, chitchatSample
 
-
+# Set the API key for Generative AI
 api_key = "AIzaSyD7JnSPUV2_ERRN_y2MV-vA_QbJiKpwbRU"
 embedding_model = SentenceTransformerEmbedding(
-            EmbeddingConfig(name='thenlper/gte-large')
+    EmbeddingConfig(name='thenlper/gte-large')
 )
+
 # Initialize the RAG class and Gemini model only once
 if "rag" not in st.session_state:
     st.session_state.rag = RAG(
@@ -21,23 +22,26 @@ if "rag" not in st.session_state:
         embeddingName='thenlper/gte-large'
     )
 
+# Initialize Google Generative AI
 if "genai_configured" not in st.session_state:
-   
     genai.configure(api_key=api_key)
     st.session_state.genai_configured = True
 
-if "semantic_router" not in st.session_state:
-    llm = genai.GenerativeModel("gemini-1.5-flash")
+# Initialize Reflection and SemanticRouter
+if "reflection" not in st.session_state:
     reflection = Reflection(api_key=api_key)
+    st.session_state.reflection = reflection
+
+if "semantic_router" not in st.session_state:
     JOB_ROUTE_NAME = 'jobs'
     CHITCHAT_ROUTE_NAME = 'chitchat'
-    productRoute = Route(name=JOB_ROUTE_NAME, samples=jobSample)
+    jobRoute = Route(name=JOB_ROUTE_NAME, samples=jobSample)
     chitchatRoute = Route(name=CHITCHAT_ROUTE_NAME, samples=chitchatSample)
-    st.session_state.reflection = reflection
     st.session_state.JOB_ROUTE_NAME = JOB_ROUTE_NAME
     st.session_state.CHITCHAT_ROUTE_NAME = CHITCHAT_ROUTE_NAME
-    st.session_state.semantic_router = SemanticRouter(embedding_model, routes=[productRoute, chitchatRoute])
+    st.session_state.semantic_router = SemanticRouter(embedding_model, routes=[jobRoute, chitchatRoute])
 
+# Page title
 st.title("Career Advisor Chatbot")
 
 # Initialize session state for storing chat history
@@ -45,11 +49,22 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # Function to display chat messages
+# Function to display chat messages
 def display_chat():
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            for part in message["parts"]:
-                st.markdown(part["text"])
+    # Check if there are any messages to display
+    if "messages" in st.session_state and st.session_state.messages:
+        # Loop through each message in the chat history
+        for message in st.session_state.messages:
+            # Display user messages
+            if message["role"] == "user":
+                with st.chat_message("user"):
+                    for part in message["parts"]:
+                        st.markdown(part["text"])
+            # Display assistant messages
+            elif message["role"] == "assistant":
+                with st.chat_message("assistant"):
+                    for part in message["parts"]:
+                        st.markdown(part["text"])
 
 # Display chat messages
 display_chat()
@@ -61,52 +76,29 @@ if prompt := st.chat_input("Ask me something?"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Determine the route using SemanticRouter
-    guided_route = st.session_state.semantic_router.guide(prompt)[1]
+    # Reflect the query to enhance the context and standalone meaning
+    reflected_query = st.session_state.reflection(st.session_state.messages)
 
-    if guided_route == st.session_state.JOB_ROUTE_NAME:
-        # Initialize data if not already done
-        if "data" not in st.session_state:
-            st.session_state.data = []
+    # Determine the route using SemanticRouter with the reflected query
+    guided_route, score = st.session_state.semantic_router.guide(reflected_query)
 
-        # Ensure combined_information is defined
-        search_results = st.session_state.rag.vector_search(prompt)
+    # If no route is confidently selected, provide fallback response
+    if guided_route is None:
+        response = "I'm not sure how to assist with that. Could you provide more details?"
+    else:
+        # Perform vector search using RAG for knowledge retrieval
+        search_results = st.session_state.rag.vector_search(reflected_query)
 
+        # Generate content using the Gemini model (RAG) based on the selected route
+        if guided_route == st.session_state.JOB_ROUTE_NAME:
+            response = st.session_state.rag.generate_content(reflected_query, search_results)
+        elif guided_route == st.session_state.CHITCHAT_ROUTE_NAME:
+            response = st.session_state.rag.generate_content(reflected_query, search_results)
 
-        # Append user query to data
-        st.session_state.data.append({
-            "role": "user",
-            "parts": [
-                {
-                    "text": search_results,
-                }
-            ]
-        })
-
-        # Add user query to chat history
-        st.session_state.messages.append({"role": "user", "parts": [{"text": prompt}]})
-
-        # Get the last message from chat history
-        data = st.session_state.messages[-1]
-
-        # Use Reflection to enhance the query
-        reflected_query = st.session_state.reflection(data["parts"][0]["text"])
-
-        # Update the prompt with the reflected query
-        prompt = reflected_query
-
-    # Perform vector search
-    search_results = st.session_state.rag.vector_search(prompt)
-
-    # Generate content using the Gemini model
-    response = st.session_state.rag.generate_content(prompt, search_results)
-
-    # Add bot response to chat history
-    st.session_state.messages.append({"role": "assistant", "parts": [{"text": response}]})
-
-    # Display bot response
-    with st.chat_message("assistant"):
-        st.markdown(response)
+    # Add bot response to chat history and display it
+        st.session_state.messages.append({"role": "assistant", "parts": [{"text": response}]})
+        with st.chat_message("assistant"):
+            st.markdown(response)
 
 # Display chat messages again to update the UI
-display_chat()
+#display_chat()

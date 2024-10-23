@@ -130,7 +130,7 @@ class RAG:
         
         # Create the prompt
         prompt = f"""
-        You are an expert in job requirements and qualifications. Based on the following information, answer the user's question:
+        You are an expert in job requirements and qualifications. Based on the following requirements, answer the user's question:
 
         Question: {user_query}
         
