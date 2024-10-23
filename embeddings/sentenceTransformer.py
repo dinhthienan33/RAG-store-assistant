@@ -1,4 +1,3 @@
-from pydantic.v1 import BaseModel, Field, validator
 from embeddings import BaseEmbedding, EmbeddingConfig
 from sentence_transformers import SentenceTransformer
 
