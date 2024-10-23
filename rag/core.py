@@ -101,6 +101,7 @@ class RAG:
         project_stage = {
             "$project": {
                 "job_requirements": 1,  # Include the job_requirements field
+                "job_description": 1,  # Include the job_description field
                 "score": {
                     "$meta": "vectorSearchScore"  # Include the search score
                 }
@@ -126,17 +127,18 @@ class RAG:
         str: The generated prompt.
         """
         # Combine search results into a single string
-        combined_results = "\n".join([f"- {result['job_requirements']}" for result in search_results])
-        
+        requirements = "\n".join([f"- {result['job_requirements']}" for result in search_results])
+        descriptions = "\n".join([f"- {result['job_description']}" for result in search_results])
         # Create the prompt
         prompt = f"""
-        You are an expert in job requirements and qualifications. Based on the following requirements, answer the user's question:
+        You are an expert in job requirements and qualifications. Based on the following requirements, answer the user's question BUT WRITE SHORTER THAT YOU CAN:
 
         Question: {user_query}
         
         Job Requirements:
-        {combined_results}
-
+        {requirements}
+        Job descriptions:
+        {descriptions}
 
         Answer:
         """

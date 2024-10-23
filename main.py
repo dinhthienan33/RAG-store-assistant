@@ -66,6 +66,12 @@ def display_chat():
                     for part in message["parts"]:
                         st.markdown(part["text"])
 
+# Clear Chat button
+if st.button("Clear Chat"):
+    st.session_state.messages = []
+    st.rerun()
+
+
 # Display chat messages
 display_chat()
 
