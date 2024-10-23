@@ -5,3 +5,4 @@ typing
 pymongo
 google-generativeai
 ipython
+sentence_transformers
