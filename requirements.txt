@@ -6,3 +6,4 @@ pymongo
 google-generativeai
 ipython
 sentence-transformers
+gradio

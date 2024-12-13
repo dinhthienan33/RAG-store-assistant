@@ -1,0 +1,193 @@
+﻿prompt = "Tôi chuẩn bị đi du lịch châu Âu vào cuối năm, shop có thể gợi ý một set đồ ấm áp không?"
+fts
+
+{'name': 'TÚI KÉO DU LỊCH CHUẨN XÁCH TAY ĐI MÁY BAY', 'score': 7.977537155151367}
+{'name': 'TÚI TRỐNG ĐỰNG ĐỒ THỂ THAO, DU LỊCH TIỆN DỤNG', 'score': 7.321237087249756}
+{'name': 'Khăn Choàng ĐI BIỂN, DẠO CHƠI, khăn quàng ấm áp', 'score': 7.164008140563965}
+{'name': 'Túi đeo chéo da nữ set 2 du lịch đi học RUDI', 'score': 6.781704902648926}
+{'name': 'TÚI ĐỰNG ĐỒ CÁ NHÂN DU LỊCH', 'score': 6.714288711547852}
+{'name': 'Bộ bé gái thu đông phong cách thể thao ấm áp có 5 màu như hình', 'score': 6.710384368896484}
+{'name': 'Đầm dự tiệc Lyna buộc nơ eo sang trọng, có nhiều size, form dáng chuẩn, dễ mặc đi tiệc, đi làm hay du lịch', 'score': 6.42081356048584}
+{'name': 'Túi xách đi làm du lịch hay gym', 'score': 6.284296035766602}
+{'name': '[HCM] Túi đựng đồ mỹ phẩm, đồ dùng cá nhân du lịch nhỏ gọn có móc treo', 'score': 6.257899284362793}
+{'name': 'Set bộ đồ tiểu thư Set váy tiểu thư - kèm bảng size hình cuối', 'score': 6.098528861999512}
+vts
+
+{'name': 'bộ thu đông', 'score': 0.730487048625946}
+{'name': 'Áo khoác Dạ tua rua sang chảnh ấm áp thu đông vnxk', 'score': 0.6828922033309937}
+{'name': 'giày nam sale trong ngày,xã lỗ nhanh tay chọn mua để có cho mình hay người thân 1 đôi ưng ý ạ', 'score': 0.6782621145248413}
+{'name': 'Đầm body thu đông cách điệu ', 'score': 0.6781485080718994}
+{'name': 'Bộ quần áo thu đông', 'score': 0.6747336387634277}
+{'name': 'Đầm thun lạnh', 'score': 0.6742491722106934}
+{'name': 'Đầm xoè sát nách 3 tầng - Minh Tâm fashion D20002', 'score': 0.6703606843948364}
+{'name': '[Mua 1 Tặng 1]  Giày tây nam công sở kiểu lười Rozalo R7015 + Tặng lót giày khử mùi hương quế', 'score': 0.6677010655403137}
+{'name': 'Đầm phối xinh chi', 'score': 0.667583703994751}
+{'name': 'Đầm phối xinh chi', 'score': 0.667583703994751}
+
+prompt = ‘Tôi cần mua một bộ đồ đi làm phù hợp với thời tiết nóng, có gợi ý nào không?"
+
+fts 
+
+{'name': 'Bộ vest nam xanh ngọc-dáng trẻ phù hợp đi làm đi chơi hay chụp ảnh cưới', 'score': 8.71253776550293}
+{'name': 'ĐẦM MAXI HAI DÂY GỢI CẢM PHÙ HỢP ĐI DẠO PHỐ, ĐI BIỂN', 'score': 8.590253829956055}
+{'name': 'FREESHIP_ BỘ ĐỒ THỂ THAO, BỘ ĐỒ TẬP GYM, PHÙ HỢP CHO NAM NỮ', 'score': 8.119192123413086}
+{'name': 'BỘ THỂ THAO NAM, BỘ TẬP GYM PHÙ HỢP CHO CẢ NAM VÀ NỮ VÁ10', 'score': 5.704567909240723}
+{'name': 'Bông/Khuyên Tai Khóa Xương Vành Tai Không Cần Bấm Lỗ', 'score': 5.55413818359375}
+{'name': 'BỘ ĐỒ 2 DÂY HOẠ TIẾT', 'score': 5.529710292816162}
+{'name': 'MUA 2 BỘ FREESHIP. BỘ ĐỒ THỂ THAO SPORT THUN LẠNH', 'score': 5.5181965827941895}
+{'name': 'MUA 2 BỘ FREESHIP_ bộ đồ thể thao ba lỗ MEXICO', 'score': 5.5181965827941895}
+{'name': 'MUA 2 BỘ FREESHIP_ BỘ ĐỒ THỂ THAO NAM PHỐI MÀU', 'score': 5.5181965827941895}
+{'name': 'Đầm body một vai trẻ trung gợi cảm', 'score': 5.479124069213867}
+
+vts 
+
+{'name': 'Quần short thun thêu hoa cúc năng động cho mùa hè hoặc tập gym', 'score': 0.6947956681251526}
+{'name': 'Bộ quần áo trẻ em - bộ quần áo cho bé trai - BỘ QUẦN ÁO BÉ TRAI - combo quần áo mua hè bé trai -  quần áo cho bé gái - quần áo trẻ em mùa hè', 'score': 0.6818737387657166}
+{'name': 'quần áo trẻ em mùa hè', 'score': 0.6814699172973633}
+{'name': 'Bộ vest nam xanh ngọc-dáng trẻ phù hợp đi làm đi chơi hay chụp ảnh cưới', 'score': 0.6682169437408447}
+{'name': 'Áo chống nắng nam', 'score': 0.6673733592033386}
+{'name': 'giày nam sale trong ngày,xã lỗ nhanh tay chọn mua để có cho mình hay người thân 1 đôi ưng ý ạ', 'score': 0.6668640971183777}
+{'name': 'Đầm thun cát hot item', 'score': 0.6617691516876221}
+{'name': 'Mũ đi nắng', 'score': 0.6608263254165649}
+{'name': 'Đầm nữ dáng xòe cho mùa hè', 'score': 0.6592013835906982}
+{'name': 'siêu sale  bộ thể thao hè dể thương cho bé', 'score': 0.6576951742172241}
+
+promt = "Shop có bán áo phông không?"
+
+fts 
+
+{'name': 'Áo phông nam , áo phông nam', 'score': 5.602511405944824}
+{'name': '[ Bán Chạy ] Áo Thun Nam Có Cổ DCB1006', 'score': 5.5557661056518555}
+{'name': 'Giày tây nam không dây bán chạy', 'score': 5.334279537200928}
+{'name': 'Áo phông nam', 'score': 5.085852146148682}
+{'name': 'Áo Phông in 3D', 'score': 4.766843795776367}
+{'name': 'áo phông nam viettien', 'score': 4.766843795776367}
+{'name': 'Áo khoác jean nam đẹp TL85, Chất đẹp bán shop Thành Long chuyên áo bò nam', 'score': 4.717806339263916}
+{'name': 'Áo Phông Croptop cổ tròn', 'score': 4.4854936599731445}
+{'name': 'áo phông nam quảng châu', 'score': 4.4854936599731445}
+{'name': '[ Bán Chạy ] Áo Thun Có Cổ Cá Sấu Nam Trơn Trung Niên DCB446', 'score': 4.442060947418213}
+
+vts
+
+{'name': '𝙁𝙍𝙀𝙀𝙎𝙃𝙄𝙋 - Áo thun nam trơn - Cổ tròn, tay ngắn tay - Mua áo phông nam trơn body bigsize màu đen trắng', 'score': 0.7356820702552795}
+{'name': 'Xả rẻ lô áo voan và áo thun siêu đẹp - ẢNH THẬT-CHO XEM HÀNG', 'score': 0.734020471572876}
+{'name': 'Áo thun co giãn đẹp [ ĐƯỢC KIỂM HÀNG ] SG566 Tronshop', 'score': 0.7304061055183411}
+{'name': '[Hàng Xả Kho Giá Vốn] Áo thun nam tay dài cổ tròn, chất cotton 100% , áo dài tay nhiều màu dáng ôm thời trang', 'score': 0.7296035289764404}
+{'name': 'Áo thun in chữ 5TW GG - Gin Store', 'score': 0.7243853807449341}
+{'name': '[Tuấn Quán Thánh Outlet] Xả quần short thun co giãn 4 chiều tập luyện, du lịch, dạo phố', 'score': 0.7194128036499023}
+{'name': 'áo thun big size', 'score': 0.7192171216011047}
+{'name': 'Quần áo trẻ em Sét bộ đồ thun cotton 4 chiều cho bé', 'score': 0.7169507741928101}
+{'name': 'Áo thun nam cổ trụ cotton 4 chiều  VNXK', 'score': 0.7169269323348999}
+{'name': 'áo thun bé gái. hang thun cao câp', 'score': 0.7168635725975037}
+
+promt = "Tôi chuẩn bị dự một buổi tiệc ngoài trời, phong cách sang trọng nhưng không quá cầu kỳ. Gợi ý giúp tôi vài mẫu nhé."
+
+fts 
+
+{'name': 'đầm nhũ phong cách sang trọng', 'score': 7.383415699005127}
+{'name': 'ĐẦM DỰ TIỆC SANG TRỌNG', 'score': 7.190375328063965}
+{'name': 'Khuyên Tai Mặt Trời Đỏ Sang Trọng', 'score': 7.143368244171143}
+{'name': 'Đầm body dự tiệc sang trọng', 'score': 6.789633750915527}
+{'name': 'Đầm body dự tiệc sang trọng', 'score': 6.789633750915527}
+{'name': 'Đầm nữ dự tiệc sang trọng', 'score': 6.789633750915527}
+{'name': 'Đầm ren dự tiệc sang trọng', 'score': 6.789633750915527}
+{'name': 'Dây chuyền nam sang trọng phong cách DCN137', 'score': 6.642953395843506}
+{'name': 'Đầm dự tiệc Queen sang trọng - nhiều size form dáng chuẩn, thích hợp mặc dự tiệc, du lịch đẹp', 'score': 6.591714859008789}
+{'name': 'Đầm QCCC Phối Hoạ Tiết Hoa Bi , dành cho những nàng thích phong cách nhẹ nhàng nhưng vẫn cá tính  , phong cách chuẩn style Trung', 'score': 6.446678161621094}
+
+vts
+
+{'name': 'đầm thiết kế đi tiệc', 'score': 0.7437610030174255}
+{'name': 'đầm thiết kế dự tiệc', 'score': 0.7427840232849121}
+{'name': 'Đầm đi tiệc xinh chi', 'score': 0.7417798042297363}
+{'name': 'Đầm đi tiệc xinh tsi', 'score': 0.7394082546234131}
+{'name': 'váy đầm dự tiệc giá rẻ ,hàng đẹp', 'score': 0.7369374632835388}
+{'name': 'Đầm dự tiệc thiết kế SANG TRỌNG', 'score': 0.7353602647781372}
+{'name': 'Đầm đi tiệc ngắn', 'score': 0.7321357131004333}
+{'name': 'Đầm dự tiệc', 'score': 0.731997013092041}
+{'name': 'Đầm dự tiệc', 'score': 0.731997013092041}
+{'name': 'Đầm dự tiệc', 'score': 0.731997013092041}
+
+prompt = "Tôi cần một bộ đồ phù hợp để đi dự đám cưới trên biển vào buổi chiều. Yêu cầu là nhẹ nhàng, dễ di chuyển, và không quá nóng. Shop có đề xuất gì không?"
+
+fts 
+
+{'name': 'đầm dự đám cưới dễ thương', 'score': 11.301414489746094}
+{'name': 'Bộ vest nam xanh ngọc-dáng trẻ phù hợp đi làm đi chơi hay chụp ảnh cưới', 'score': 8.723875045776367}
+{'name': 'ĐẦM MAXI HAI DÂY GỢI CẢM PHÙ HỢP ĐI DẠO PHỐ, ĐI BIỂN', 'score': 8.472172737121582}
+{'name': 'Bộ vest nam dáng ôm mặc đi sự kiện, đám cưới, đám hỏi, vệ sĩ,công sở', 'score': 8.345233917236328}
+{'name': 'FREESHIP_ BỘ ĐỒ THỂ THAO, BỘ ĐỒ TẬP GYM, PHÙ HỢP CHO NAM NỮ', 'score': 8.119192123413086}
+{'name': 'QUẦN TÂY NAM CO GIÃN NHẸ KHÔNG NHĂN, KHÔNG XÙ, KHÔNG PHAI MÀU', 'score': 7.996064186096191}
+{'name': 'Áo Khoác Nam Vải Co Giãn 4 Chiều Không Nhăn Không Xù', 'score': 7.483131408691406}
+{'name': 'Bông/Khuyên Tai Khóa Xương Vành Tai Không Cần Bấm Lỗ', 'score': 7.474052429199219}
+{'name': 'Vòng tay nữ titan một hàng xoàn ver3 WVT583 Không đen không gỉ sét', 'score': 7.339836597442627}
+{'name': 'BỘ THỂ THAO NAM, BỘ TẬP GYM PHÙ HỢP CHO CẢ NAM VÀ NỮ VÁ10', 'score': 7.160277366638184}
+
+vts
+
+{'name': 'đầm maxi đi biển vintage tặng khăn thắt lưng váy maxi đi biển L12MX09', 'score': 0.6911605596542358}
+{'name': '(miễn phí chỉnh váy) sét maxi áo trễ vai và chân váy tầng đi biển du lịch chụp hình thiết kế tiểu thư sống ảo', 'score': 0.6886188387870789}
+{'name': 'Đầm maxi trắng trễ vai  nhẹ nhàn  đi chơi  đi biển sang trọng', 'score': 0.6824864745140076}
+{'name': 'Đầm dự tiệc cát hàn xinh', 'score': 0.677324116230011}
+{'name': 'Đầm dự tiệc cát hàn dễ thương', 'score': 0.6760914325714111}
+{'name': 'Set bộ trang sức cưới kiểu hoa mai màu vàng 24 cao cấp mẫu mới về', 'score': 0.6735092997550964}
+{'name': 'Đầm trắng dự tiệc cưới lộng lẫy', 'score': 0.6695268154144287}
+{'name': 'Đầm dự tiệc Queen sang trọng - nhiều size form dáng chuẩn, thích hợp mặc dự tiệc, du lịch đẹp', 'score': 0.6684399843215942}
+{'name': 'đầm dự đám cưới dễ thương', 'score': 0.6679016351699829}
+{'name': 'Đồ bơi trẻ em, đồ bơi cho bé, bộ đồ bơi bikini 2 mảnh Rika', 'score': 0.6678637862205505}
+
+promt = "Tôi cần một bộ đầm phá cách, không quá cứng nhắc, có mẫu nào mới nhất không?"
+
+fts 
+
+{'name': 'Vòng tay nữ titan một hàng xoàn ver3 WVT583 Không đen không gỉ sét', 'score': 7.999906539916992}
+{'name': 'Bông/Khuyên Tai Khóa Xương Vành Tai Không Cần Bấm Lỗ', 'score': 7.474052429199219}
+{'name': 'Đầm body nữ phá cách', 'score': 7.143749713897705}
+{'name': 'Áo ren nữ mẫu mới nhất thu đông 2020', 'score': 7.068874359130859}
+{'name': ' Đầm hè phong cách mới thời trang không tay cho hè 2019', 'score': 7.062676429748535}
+{'name': 'BỘ CỘC NOUBABY  MỚI NHẤT', 'score': 7.054834365844727}
+{'name': 'Dép Cà Rốt Mẫu Mới Nhất 2020', 'score': 6.911227226257324}
+{'name': 'Đầm nữ cát hàn phá cách', 'score': 6.745606899261475}
+{'name': 'Đầm nữ cát hàn phá cách', 'score': 6.745606899261475}
+{'name': 'Đầm Nữ mẫu Mới', 'score': 6.493337154388428}
+
+vts
+
+{'name': 'Đầm Nữ mẫu Mới', 'score': 0.7641884684562683}
+{'name': 'Đầm Thun Nữ Mẫu Mới', 'score': 0.7635494470596313}
+{'name': 'Đầm Nữ Mẫu mới Maxi Tôn Dáng Sành Điệu Siêu hot', 'score': 0.7502216696739197}
+{'name': 'Đầm Nữ Mẫu mới Maxi Tôn Dáng Sành Điệu Siêu hot', 'score': 0.7502216696739197}
+{'name': 'Đầm Nữ Mẫu Mới Maxi Tôn Dáng Sành Điệu Siêu Hot', 'score': 0.7471707463264465}
+{'name': 'Đầm Nữ Mẫu Mới Maxi Tôn Dáng Sành Điệu Siêu Hot', 'score': 0.7471707463264465}
+{'name': 'đầm xoè kiểu sexy ', 'score': 0.7467606663703918}
+{'name': 'đầm kiểu xinh ', 'score': 0.7454811930656433}
+{'name': 'đầm kiểu nữ đơn giản', 'score': 0.7442793250083923}
+{'name': 'đầm xoè kiểu mới mẻ ', 'score': 0.7410051822662354}
+
+prompt = "Tôi là người theo phong cách minimal, gợi ý cho tôi vài sản phẩm thời trang phù hợp với phong cách này."
+
+fts 
+
+{'name': 'Hoa Tai Phong Cách thời trang', 'score': 10.794692039489746}
+{'name': 'ĐẦM NỮ THỜI TRANG PHONG CÁCH', 'score': 10.794692039489746}
+{'name': 'ĐẦM NỮ THỜI TRANG PHONG CÁCH', 'score': 10.794692039489746}
+{'name': 'Váy Suông Nữ Thời Trang Phong cách', 'score': 10.224832534790039}
+{'name': 'Đầm voan thời trang phong cách 110K', 'score': 10.224832534790039}
+{'name': 'Nhẫn thời trang hình mặt người trừu trượng phong cách Âu Mỹ', 'score': 10.20058822631836}
+{'name': 'Đầm Nữ Foom Dài Thời Trang Phong cách', 'score': 9.712121963500977}
+{'name': 'Balo Thời Trang Phong Cách Trẻ Kakapo Bl018', 'score': 9.712121963500977}
+{'name': 'Giày Thể Thao Nam Phong Cách Thời Trang', 'score': 9.712121963500977}
+{'name': 'GIÀY THỂ THAO NỮ THỜI TRANG PHONG CÁCH', 'score': 9.712121963500977}
+
+vts
+
+{'name': 'Đầm maxi trễ vai phối được nhiều kiểu dễ thương  maxi mới nhất', 'score': 0.7709856629371643}
+{'name': 'Đầm maxi ngắn xinh giao màu ngẫu nhiên', 'score': 0.7589279413223267}
+{'name': 'Đầm thun đẹp đơn giản', 'score': 0.7550666332244873}
+{'name': 'Đầm xoè ren cổ đắp chéo  siêu dễ thương', 'score': 0.7449796199798584}
+{'name': 'Đầm maxi hoa vàng phối 3 kiểu mặc siêu dễ thương  maxi mới - Hình thật Sp 100', 'score': 0.7433007955551147}
+{'name': 'Đầm maxi thiết kế', 'score': 0.7427618503570557}
+{'name': 'Đầm xô viền ren cổ vuông đuôi cá \nSiêu phẩm mong đợi về rồi chị em uiii, cuối tuần diện em này dạo phố nhẹ nhàng nha\n Chất liệu xô mát mẻ phối ren cực sang chảnh, diện lên đảm bảo đốn tim khối người nạ. Diện em này xinh như công chúa luôn ạ, chất xô ', 'score': 0.7374546527862549}
+{'name': 'Đầm suông tay ngắn cổ tròn (Đồng giá - nhiều mẫu - nhiều màu)', 'score': 0.7369699478149414}
+{'name': 'váy suôn thiết kế đẹp và rẻ', 'score': 0.7355856895446777}
+{'name': 'váy suôn thiết kế đẹp và rẻ', 'score': 0.7355856895446777}

@@ -1,3 +1,0 @@
-from embeddings.base import EmbeddingConfig,BaseEmbedding
-from embeddings.sentenceTransformer import SentenceTransformerEmbedding
-
