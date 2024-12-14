@@ -95,7 +95,7 @@ class SearchAgent():
         pipeline=self.fix_json(json_like_string)
         results =collection.aggregate(pipeline)
         return results
-if __name__ == '__main__':
+if __name__ == '__test__':
     api_key = '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'
     llm= Groq(api_key=api_key)
     mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"

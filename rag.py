@@ -32,9 +32,8 @@ class RAG:
             "Bạn tên Lan, là một người tư vấn sản phẩm cho sàn thương mại điện tử AnhLong. "
             "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, ngắn gọn nhất. "
             "Hãy nhớ rằng bạn cần thể hiện sự chuyên nghiệp và tận tâm. "
-            "Chỉ đưa ra 5 sản phẩm đầu tiên thôi. Nếu khách cần thêm, hãy đưa ra những cái còn lại"
             "đừng lặp lại sản phẩm đã tư vấn "
-            "nếu khách hỏi về hàng hóa thì hãy trả lời, còn không thì bạn hãy nói kiến thức của bạn chỉ dành cho tư vấn khách hàng"
+            " chỉ trả lời những câu hỏi liên quan tới hàng hóa, nếu có  câu hỏi nào khác hãy trả lời : 'Tôi không có thông tin gì về câu hỏi của anh'"
             f"Xưng hô là 'em' và khách là anh."
         )
     }
@@ -73,7 +72,7 @@ class RAG:
                 "queryVector": embeddings,
                 "path": "embedding",
                 "numCandidates": 1000,  # Number of candidate matches to consider
-                "limit": 10  # Return top 'limit' matches
+                "limit": 5  # Return top 'limit' matches
                 }
             },
             {
@@ -92,7 +91,68 @@ class RAG:
         # Execute the aggregation pipeline
         results = list(self.collection.aggregate(pipeline))
         return results
+    def full_text_search(self, query):
+        """
+        Perform full-text search in the MongoDB collection.
+        """
+        pipeline=[{
+            '$search': {
+                'index': 'default', 
+                'text': {
+                    'query': query, 
+                    'path': ['name','description'],  
+                }
+            }
+        },
+        {
+            '$project': {
+                '_id': 0,
+                'name': 1,
+                'price': 1,
+                'final_price': 1,
+                'shop_free_shipping': 1,
+                'attribute': 1,
+                'description': 1            
+            }
+        },
+        {
+            '$limit': 5
+        }]
+        results = list(self.collection.aggregate(pipeline))
+        return results
 
+    def hybrid_search(self, query):
+        """
+        Perform a hybrid search combining vector search and full-text search.
+
+        Args:
+        query (str): The query text.
+
+        Returns:
+        list: A combined list of search results from vector and full-text search.
+        """
+        # Perform vector search
+        vector_results = self.vector_search(query)
+
+        # Perform full-text search
+        text_results = self.full_text_search(query)
+
+        # Combine results
+        combined_results = vector_results + text_results
+
+        # Deduplicate results based on 'name'
+        seen = set()
+        unique_results = []
+        for result in combined_results:
+            if result['name'] not in seen:
+                unique_results.append(result)
+                seen.add(result['name'])
+
+        # Optionally sort or rank results if needed
+        # For example, prioritize vector results
+        # unique_results = sorted(unique_results, key=lambda x: x.get('source', 'text') == 'vector', reverse=True)
+
+        return unique_results
     def create_prompt(self,search_results,query):
         """
         Create a prompt from search results.
@@ -146,20 +206,30 @@ class RAG:
         """
         self.chat_history.append({"role": role, "content": content})
         return self.chat_history
-    def remove_history(self, role, content):
+
+    def remove_message(self, role=None, content=None):
         """
-        Remove a message from the conversation history.
+        Remove the first message from the conversation history.
 
         Args:
-        role (str): The role of the participant ('user' or 'assistant').
-        content (str): The message content.
+        role (str, optional): The role of the participant ('user' or 'assistant'). If provided, only messages with this role will be considered.
+        content (str, optional): The message content. If provided, only messages with this content will be considered.
 
         Returns:
         list: The updated history.
         """
-        self.chat_history = [msg for msg in self.chat_history if not (msg["role"] == role and msg["content"] == content)]
+        if role is None and content is None:
+            # Remove the second message if no role or content is specified
+            if self.chat_history:
+                self.chat_history.pop(1)
+        else:
+            # Remove the first message that matches the role and/or content
+            for i, msg in enumerate(self.chat_history):
+                if (role is None or msg["role"] == role) and (content is None or msg["content"] == content):
+                    self.chat_history.pop(i)
+                    break
         return self.chat_history
-    def remove_all_history(self):
+    def remove_history(self):
         """
         Remove all messages from the conversation history.
 
@@ -173,9 +243,8 @@ class RAG:
             "Bạn tên Lan, là một người tư vấn sản phẩm cho sàn thương mại điện tử AnhLong. "
             "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, ngắn gọn nhất. "
             "Hãy nhớ rằng bạn cần thể hiện sự chuyên nghiệp và tận tâm. "
-            "Chỉ đưa ra 5 sản phẩm đầu tiên thôi. Nếu khách cần thêm, hãy đưa ra những cái còn lại"
             "đừng lặp lại sản phẩm đã tư vấn "
-            "nếu khách hỏi về hàng hóa thì hãy trả lời, còn không thì bạn hãy nói kiến thức của bạn chỉ dành cho tư vấn khách hàng"
+            "nếu khách hỏi về hàng hóa thì hãy trả lời, còn không thì bạn hãy nói kiến thức của bạn chỉ dành cho tư vấn khách hàng về những sản phẩm"
             f"Xưng hô là 'em' và khách là anh."
         )
     }
@@ -205,7 +274,7 @@ class RAG:
         """
         text = text.replace('•', '  *')
         return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
-if __name__ == '__test__':
+if __name__ == '__main__':
     llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
     mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
     db_name = "product"
@@ -214,15 +283,20 @@ if __name__ == '__test__':
     collection=client.get_collection()
     rag=RAG(collection=collection,llm_model=llm)
     query='đầm dự tiệc'
-    print(query)
-    search_result=rag.vector_search(query=query)
-    prompt=rag.create_prompt(search_results=search_result,query=query)
-    rag.update_history(role='user',content=prompt)
-    respone=rag.answer_query()
-    print(respone)
-    query = 'trong những sản phẩm trên, có sản phẩm nào giảm giá không'
-    print(query)
-    rag.update_history(role='user',content=query)
-    respone=rag.answer_query()
-    print(respone)
+    #print(query)
+    search_result=rag.hybrid_search(query=query)
+    for item in search_result:
+        print(item['name'])
+    # prompt=rag.create_prompt(search_results=search_result,query=query)
+    # rag.update_history(role='user',content=prompt)
+    # respone=rag.answer_query()
+    # print(respone)
+    #print(rag.remove_message())
+    #print(respone)
+    # query = 'trong những sản phẩm trên, có sản phẩm nào giảm giá không'
+    # #print(query)
+    # rag.update_history(role='user',content=query)
+    # respone=rag.answer_query()
+    
+    #print(respone)
     

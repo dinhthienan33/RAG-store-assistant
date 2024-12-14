@@ -1,5 +1,6 @@
 import gradio as gr
 from rag import RAG, GetLLM, GetCollection
+import time
 
 # Global variable to hold the RAG instance
 rag_instance = None
@@ -21,86 +22,107 @@ def initialize_rag():
     
     # Initialize the RAG instance
     rag_instance = RAG(collection=collection, llm_model=llm)
-    
-    # Clear all history upon initialization
-    rag_instance.remove_all_history()
-
+    rag_instance.remove_history()  # Clear all history upon initialization
     return rag_instance
 
+rag = initialize_rag()
+
 # Function to handle user queries
-def chatbot_interface(query):
-    # Reinitialize RAG on each interaction (simulating reset)
-    rag = initialize_rag()
-    
-    # Perform vector search and create prompt
-    search_result = rag.vector_search(query=query)
-    prompt = rag.create_prompt(search_results=search_result, query=query)
+def chatbot_interface(chat_history, click_count, query):
+    # Increment the click counter
+    click_count += 1
+    if click_count == 1:   
+        # Perform vector search and create prompt
+        search_result = rag.hybrid_search(query=query)
+        prompt = rag.create_prompt(search_results=search_result, query=query)
+    else:
+        prompt = query
     rag.update_history(role='user', content=prompt)  # Add user query to history
 
     # Get response from the model
     response = rag.answer_query()
     rag.update_history(role='assistant', content=response)  # Add response to history
 
-    # Stream response back to the user
-    full_response = ""
-    for chunk in response.split(". "):
-        full_response += chunk + ". "
-        yield full_response
+    # Update chat history
+    chat_history.append(("You", query))
+    chat_history.append(("Assistant", ""))
+
+    # Stream response back to the user slowly
+    for i in range(len(response)):
+        chat_history[-1] = ("Assistant", response[:i+1])
+        time.sleep(0.05)  # Adjust the delay as needed
+        yield chat_history, click_count, ""  # Clear input box after submit
+
+def clear_history():
+    rag_instance.remove_history()
 
 # Gradio Interface
-with gr.Blocks(theme=gr.themes.Soft()) as iface:
+with gr.Blocks(theme=gr.themes.Monochrome()) as iface:
     gr.Markdown(
         """
         # 🛒 **E-commerce Chatbot**
-        **Ask me about products, and I'll provide professional advice tailored to your needs!**
+        **Chatbot hỗ trợ mua hang tại shop AnhLong!**
         """
     )
-    with gr.Row():
-        with gr.Column(scale=2):
-            user_input = gr.Textbox(
-                lines=2, 
-                placeholder="Enter your query here...", 
-                label="Your Query",
-                interactive=True,
-            )
-            submit_button = gr.Button("💬 Ask")
-            gr.Markdown(
-                """
-                ### **Sample Questions**
-                - **Shop có bán quần short không?**
-                - **Áo thun nam giá bao nhiêu vậy?**
-                - **Có đồ cho bé gái 3 tuổi không?**
-                - **Shop có nhận giao hàng không? Phí ship là bao nhiêu?**
-                """
-            )
-        with gr.Column(scale=3):
-            chatbot_output = gr.Textbox(
-                label="Chatbot Response", 
-                lines=8, 
-                interactive=False,
-            )
+
+    chat_history = gr.Chatbot(label="Chat History")  # Chatbot component for scrolling
+    user_input = gr.Textbox(
+        lines=2, 
+        placeholder="Enter your query here...", 
+        label="Your Query",
+    )
+    click_counter = gr.State(value=0)  # State to track button clicks
+    click_display = gr.Textbox(
+        label="Submit Button Click Count", 
+        interactive=False,
+        value="0",
+    )
+
+    submit_button = gr.Button("💬 Ask")
+    reset_button = gr.Button("🔄 Restart Chat")
 
     gr.Markdown(
         """
-        ---
-        **💡 Tip:** Ask about products using specific queries like "Find me a dress under 200,000 VND."
+        ### **Sample Questions**
+        - **Shop có bán quần short không?**
+        - **Áo thun nam giá bao nhiêu vậy?**
+        - **Có đồ cho bé gái 3 tuổi không?**
+        - **Shop có nhận giao hàng không? Phí ship là bao nhiêu?**
+        - **Tôi cần tư vấn quà tặng sinh nhật ngừoi yêu?**
+        
         """
     )
 
-    # Add Reset Button
-    reset_button = gr.Button("🔄 Restart Chat")
-
-    # Connect Submit and Reset Buttons
+    # Connect submit button
     submit_button.click(
         fn=chatbot_interface,
-        inputs=user_input,
-        outputs=chatbot_output,
+        inputs=[chat_history, click_counter, user_input],
+        outputs=[chat_history, click_counter, user_input],
     )
 
+    # Update the click count display
+    submit_button.click(
+        fn=lambda click_count: str(click_count),
+        inputs=[click_counter],
+        outputs=[click_display],
+    )
+
+    # Connect reset button to clear chat history, counter, and input
     reset_button.click(
-        fn=lambda: ("", ""),  # Clear user input and chatbot output
+        fn=lambda: ([], 0, ""),  # Clear chat history, reset counter, and input
         inputs=None,
-        outputs=[user_input, chatbot_output],
+        outputs=[chat_history, click_counter, user_input],
+    )
+    reset_button.click(
+        fn=clear_history,
+        inputs=None,
+        outputs=None,
+    )
+    # Reset the click count display
+    reset_button.click(
+        fn=lambda: "0",
+        inputs=None,
+        outputs=click_display,
     )
 
 if __name__ == "__main__":
