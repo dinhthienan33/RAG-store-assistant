@@ -2,8 +2,9 @@ from IPython.display import Markdown
 import textwrap
 from sentence_transformers import SentenceTransformer
 from pyvi.ViTokenizer import tokenize
-from getCollection import GetCollection
-from getLLM import GetLLM
+from chatbot.getCollection import GetCollection
+from chatbot.getLLM import GetLLM
+
 class RAG:
     def __init__(self,
                  embeddingName: str = 'dangvantuan/vietnamese-embedding',
@@ -33,7 +34,6 @@ class RAG:
             "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, ngắn gọn nhất. "
             "Hãy nhớ rằng bạn cần thể hiện sự chuyên nghiệp và tận tâm. "
             "đừng lặp lại sản phẩm đã tư vấn "
-            " chỉ trả lời những câu hỏi liên quan tới hàng hóa, nếu có  câu hỏi nào khác hãy trả lời : 'Tôi không có thông tin gì về câu hỏi của anh'"
             f"Xưng hô là 'em' và khách là anh."
         )
     }
@@ -141,18 +141,18 @@ class RAG:
         combined_results = vector_results + text_results
 
         # Deduplicate results based on 'name'
-        seen = set()
-        unique_results = []
-        for result in combined_results:
-            if result['name'] not in seen:
-                unique_results.append(result)
-                seen.add(result['name'])
+        # seen = set()
+        # unique_results = []
+        # for result in combined_results:
+        #     if result['name'] not in seen:
+        #         unique_results.append(result)
+        #         seen.add(result['name'])
 
         # Optionally sort or rank results if needed
         # For example, prioritize vector results
         # unique_results = sorted(unique_results, key=lambda x: x.get('source', 'text') == 'vector', reverse=True)
 
-        return unique_results
+        return combined_results
     def create_prompt(self,search_results,query):
         """
         Create a prompt from search results.
@@ -185,8 +185,8 @@ class RAG:
         )
 
         # Generate the final prompt
-        prompt = f"""
-        Thông tin bạn nhận được, dùng cái này kèm với câu hỏi từ khách hàng để TƯ VẤN, nếu ở đây không có, hãy dựa vào thông tin ban đầu nhận được. Hạn chế sử dụng thông tin không được cung cấp, không được trả lời sản phẩm trùng với sản phẩm đã tư vấn trước đó, trả lời CHÍNH XÁC tên được cung cấp:
+        prompt = f""" Hãy dựa vào thông tin bạn nhận được để trả lời câu hỏi của khách hàng. Trả lời đầy đủ thông tin cần thiết : tên sản phẩm , giá tiền, mô tả ngắn gọn.
+        Thông tin bạn nhận được:
         {product_details}
         Khách hàng: 
         {query}
@@ -241,7 +241,7 @@ class RAG:
         "role": "system",
         "content": (
             "Bạn tên Lan, là một người tư vấn sản phẩm cho sàn thương mại điện tử AnhLong. "
-            "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, ngắn gọn nhất. "
+            "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, gồm tên, giá và mô tả sơ bộ của sản phẩm. "
             "Hãy nhớ rằng bạn cần thể hiện sự chuyên nghiệp và tận tâm. "
             "đừng lặp lại sản phẩm đã tư vấn "
             "nếu khách hỏi về hàng hóa thì hãy trả lời, còn không thì bạn hãy nói kiến thức của bạn chỉ dành cho tư vấn khách hàng về những sản phẩm"
@@ -260,7 +260,14 @@ class RAG:
         response = self.llm.generate_content(prompt_structure)
         self.update_history("assistant", response)
         return response
+    def get_history(self):
+        """
+        Get the conversation history.
 
+        Returns:
+        list: The conversation history.
+        """
+        return self.chat_history
     @staticmethod
     def _to_markdown(text):
         """
@@ -285,12 +292,13 @@ if __name__ == '__main__':
     query='đầm dự tiệc'
     #print(query)
     search_result=rag.hybrid_search(query=query)
-    for item in search_result:
-        print(item['name'])
-    # prompt=rag.create_prompt(search_results=search_result,query=query)
-    # rag.update_history(role='user',content=prompt)
-    # respone=rag.answer_query()
-    # print(respone)
+    # for item in search_result:
+    #     print(item)
+    prompt=rag.create_prompt(search_results=search_result,query=query)
+    #print(prompt)
+    rag.update_history(role='user',content=prompt)
+    respone=rag.answer_query()
+    print(respone)
     #print(rag.remove_message())
     #print(respone)
     # query = 'trong những sản phẩm trên, có sản phẩm nào giảm giá không'

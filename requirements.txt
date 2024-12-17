@@ -7,3 +7,4 @@ google-generativeai
 ipython
 sentence-transformers
 gradio
+semantic_router

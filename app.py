@@ -1,7 +1,7 @@
 # app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from rag import get_response
+from chatbot.rag import get_response
 from text_to_search import search_text
 
 app = Flask(__name__)
