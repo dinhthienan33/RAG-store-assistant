@@ -165,6 +165,8 @@ class RAG:
         """
         # Map each document using the projection fields
         info = []
+        if not search_results:
+            return f"Không tìm thấy kết quả nào cho '{query}'. Hãy dùng các thông tin bên trên."
         for item in search_results:
             # Safely extract fields with fallback values
             mapped_item = {
@@ -205,7 +207,6 @@ class RAG:
         list: The updated history.
         """
         self.chat_history.append({"role": role, "content": content})
-        return self.chat_history
 
     def remove_message(self, role=None, content=None):
         """

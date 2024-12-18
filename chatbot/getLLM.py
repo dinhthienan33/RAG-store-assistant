@@ -30,6 +30,8 @@ class GetLLM:
         # Generate the response using the generative AI model
         chat_completion = self.Groqclient.chat.completions.create(**data)
         response = chat_completion.choices[0].message.content
+        if(not response):
+            response = "Xin lỗi, tôi không hiểu câu hỏi của bạn. Vui lòng thử lại."
         return response
     
 

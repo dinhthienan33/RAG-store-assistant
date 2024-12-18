@@ -57,14 +57,17 @@ def chatbot_interface(click_count, query):
 
     # Increment the click counter
     click_count += 1
-    if click_count == 1 or click_count > 5:
-        # Perform vector search and create prompt
-        search_result = rag.hybrid_search(query=query)
-        prompt = rag.create_prompt(search_results=search_result, query=query)
-        if click_count > 3:
-            rag.remove_message()
-    else:
-        prompt = query
+    # if click_count == 1 or click_count > 5:
+    #     # Perform vector search and create prompt
+    #     search_result = rag.hybrid_search(query=query)
+    #     prompt = rag.create_prompt(search_results=search_result, query=query)
+    #     if click_count > 3:
+    #         rag.remove_message()
+    # else:
+    #     prompt = query
+     # Perform vector search and create prompt
+    search_result = rag.hybrid_search(query=query)
+    prompt = rag.create_prompt(search_results=search_result, query=query)
     rag.update_history(role='user', content=prompt)  # Add user query to history
 
     # Get response from the model

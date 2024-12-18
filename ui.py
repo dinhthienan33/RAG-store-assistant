@@ -1,12 +1,19 @@
-import time
 import gradio as gr
 
-def slow_echo(message, history):
-    for i in range(len(message)):
-        time.sleep(0.05)
-        yield "You typed: " + message[: i+1]
+def yes_man(message, history):
+    if message.endswith("?"):
+        return "Yes"
+    else:
+        return "Ask me anything!"
 
 gr.ChatInterface(
-    fn=slow_echo, 
-    type="messages"
+    yes_man,
+    type="messages",
+    chatbot=gr.Chatbot(height=300),
+    textbox=gr.Textbox(placeholder="Ask me a yes or no question", container=False, scale=7),
+    title="Yes Man",
+    description="Ask Yes Man any question",
+    theme="ocean",
+    examples=["Hello", "Am I cool?", "Are tomatoes vegetables?"],
+    cache_examples=True,
 ).launch()
