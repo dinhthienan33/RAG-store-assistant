@@ -2,8 +2,8 @@ from IPython.display import Markdown
 import textwrap
 from sentence_transformers import SentenceTransformer
 from pyvi.ViTokenizer import tokenize
-from chatbot.getCollection import GetCollection
-from chatbot.getLLM import GetLLM
+from getCollection import GetCollection
+from getLLM import GetLLM
 
 class RAG:
     def __init__(self,
@@ -72,7 +72,7 @@ class RAG:
                 "queryVector": embeddings,
                 "path": "embedding",
                 "numCandidates": 1000,  # Number of candidate matches to consider
-                "limit": 5  # Return top 'limit' matches
+                "limit": 10  # Return top 'limit' matches
                 }
             },
             {
@@ -116,14 +116,14 @@ class RAG:
             }
         },
         {
-            '$limit': 5
+            '$limit': 10
         }]
         results = list(self.collection.aggregate(pipeline))
         return results
-
+    
     def hybrid_search(self, query):
         """
-        Perform a hybrid search combining vector search and full-text search.
+        Perform a hybrid search combining vector search and full-text search using Reciprocal Rank Fusion (RRF).
 
         Args:
         query (str): The query text.
@@ -137,22 +137,35 @@ class RAG:
         # Perform full-text search
         text_results = self.full_text_search(query)
 
-        # Combine results
-        combined_results = vector_results + text_results
+        # Combine results using Reciprocal Rank Fusion (RRF)
+        def rrf(results, k=60):
+            rank_dict = {}
+            for rank, result in enumerate(results):
+                name = result['name']
+                if name not in rank_dict:
+                    rank_dict[name] = 0
+                rank_dict[name] += 1 / (k + rank + 1)
+            return rank_dict
 
-        # Deduplicate results based on 'name'
-        # seen = set()
-        # unique_results = []
-        # for result in combined_results:
-        #     if result['name'] not in seen:
-        #         unique_results.append(result)
-        #         seen.add(result['name'])
+        vector_rank = rrf(vector_results)
+        text_rank = rrf(text_results)
 
-        # Optionally sort or rank results if needed
-        # For example, prioritize vector results
-        # unique_results = sorted(unique_results, key=lambda x: x.get('source', 'text') == 'vector', reverse=True)
+        combined_rank = {}
+        for name in set(vector_rank.keys()).union(text_rank.keys()):
+            combined_rank[name] = vector_rank.get(name, 0) + text_rank.get(name, 0)
 
-        return combined_results
+        # Sort results by combined rank
+        combined_results = sorted(combined_rank.items(), key=lambda x: x[1], reverse=True)
+
+        # Convert sorted results back to original format
+        final_results = []
+        for name, _ in combined_results:
+            for result in vector_results + text_results:
+                if result['name'] == name:
+                    final_results.append(result)
+                    break
+
+        return final_results
     def create_prompt(self,search_results,query):
         """
         Create a prompt from search results.
@@ -290,16 +303,19 @@ if __name__ == '__main__':
     client = GetCollection(mongodb_uri, db_name, collection_name)
     collection=client.get_collection()
     rag=RAG(collection=collection,llm_model=llm)
-    query='đầm dự tiệc'
+    query='quà tặng sinh nhật bạn gái thanh thiếu niên, dễ thương, da trắng'
     #print(query)
-    search_result=rag.hybrid_search(query=query)
+    search_result=rag.vector_search(query=query)
     # for item in search_result:
     #     print(item)
     prompt=rag.create_prompt(search_results=search_result,query=query)
-    #print(prompt)
+    # #print(prompt)
     rag.update_history(role='user',content=prompt)
     respone=rag.answer_query()
-    print(respone)
+    with open('response_file.txt', 'w', encoding='utf-8') as file:
+        file.write(respone)
+
+    # print(respone)
     #print(rag.remove_message())
     #print(respone)
     # query = 'trong những sản phẩm trên, có sản phẩm nào giảm giá không'
