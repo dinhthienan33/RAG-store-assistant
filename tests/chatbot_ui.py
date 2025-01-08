@@ -1,5 +1,5 @@
 import gradio as gr
-from backend import initialize_rag, chatbot_logic
+from test.backend import initialize_rag, chatbot_logic
 
 # Function to initialize RAG with user-provided API details
 def initialize_rag_with_api(api_key, mongodb_uri):
