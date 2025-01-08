@@ -2,3 +2,8 @@ andt
 snn5T*6fFP5P5zt
 22520010
 toilaan123
+groq api : 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
+
+uri mongodb: mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs
+
+ngrok : 2rKz7Y5enY0oO8iQLDgzhrYuhfb_89zqUtfJsrDQAMnHnzWgB

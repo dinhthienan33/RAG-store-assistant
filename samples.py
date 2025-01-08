@@ -155,7 +155,7 @@ product = [
     "Sản phẩm này có phù hợp với mọi lứa tuổi không?",
     "Áo này có họa tiết in hay thêu?",
     "Tôi có thể xem video review sản phẩm không?",
-    "cho tôi xe m"
+    "cho tôi xem sản phẩm này đi"
     "Chiếc váy này có thắt lưng đi kèm không?",
     "Sản phẩm này có màu pastel không?",
     "Quần này có dễ rách không nếu sử dụng thường xuyên?",
@@ -175,6 +175,9 @@ product = [
     "Shop có thể gợi ý trang phục phù hợp cho tiệc cưới ban ngày không? Tôi muốn mặc màu pastel.",
     "Tôi muốn mua một chiếc áo sơ mi không nhăn và dễ giặt, có mẫu nào không?",
     "vậy còn cái thứ hai thì sao",
+    "sản phẩm mới",
+    "đầm đen",
+    "quần áo váy",
     "cho tôi thông tin chi tiết của cái đầu tiên"
     "Tôi là người theo phong cách minimal, gợi ý cho tôi vài sản phẩm thời trang phù hợp với phong cách này.",
     "Tôi muốn phối một bộ đồ vừa thoải mái vừa lịch sự để đi phỏng vấn xin việc. Tôi cao 1m75, da ngăm, phong cách của tôi khá tối giản. Có gợi ý nào không?",

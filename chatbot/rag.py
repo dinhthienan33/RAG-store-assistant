@@ -2,14 +2,14 @@ from IPython.display import Markdown
 import textwrap
 from sentence_transformers import SentenceTransformer
 from pyvi.ViTokenizer import tokenize
-from getCollection import GetCollection
-from getLLM import GetLLM
+# from getCollection import GetCollection
+# from getLLM import GetLLM
 
 class RAG:
     def __init__(self,
+                 llm_model,
+                 collection,
                  embeddingName: str = 'dangvantuan/vietnamese-embedding',
-                 llm_model: GetLLM = None,
-                 collection: GetCollection =None, 
                  history: list = None):
         """
         Initialize the RAG class.
@@ -312,10 +312,10 @@ if __name__ == '__main__':
     # #print(prompt)
     rag.update_history(role='user',content=prompt)
     respone=rag.answer_query()
-    with open('response_file.txt', 'w', encoding='utf-8') as file:
-        file.write(respone)
+    # with open('response_file.txt', 'w', encoding='utf-8') as file:
+    #     file.write(respone)
 
-    # print(respone)
+    print(respone)
     #print(rag.remove_message())
     #print(respone)
     # query = 'trong những sản phẩm trên, có sản phẩm nào giảm giá không'

@@ -57,8 +57,8 @@ class CSVToMongoDB:
 # Example usage
 if __name__ == "__main__":
     mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
-    db_name = "test_db"
-    collection_name = "lastoflast"
+    db_name = "product"
+    collection_name = "sendo"
     # csv_file_path = "lastoflast.csv"
     # json_file_path = "data.json"
 
