@@ -1,5 +1,5 @@
 // import avatar from "../assets/avatar.jpg";
-import robot_img from "../assets/robot_image.png";
+import robot_img from "../assets/rem.png";
 import { useState, useRef, useEffect } from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { TypeAnimation } from "react-type-animation";
@@ -12,27 +12,29 @@ function ChatBot(props) {
   let [sourceData, SetSourceData] = useState("nttu");
   let [chatHistory, SetChatHistory] = useState([]);
 
-  const commonQuestions=[
-    "Điều kiện nhận học bổng?",
-    "Bao nhiêu điểm thì học lực Xuất sắc?",
-    "Bao nhiêu điểm thì học lực Giỏi?",
-    "Bao nhiêu điểm thì học lực Khá?",
-    "Điều kiện thực tập tốt nghiệp là gì?",
-    "Học phần đã đăng ký có trạng thái N* là gì?",
-    "Điều kiện nào để được xét chuyển trường?",
-    "Lệ phí cấp bảng điểm là bao nhiêu?",
-    "Nếu điểm thi kết thúc học phần < 4 thì như thế nào?",
-    "Phí cấp lại thẻ sinh viên khi bị mất là bao nhiêu?",
-    "Để đạt loại tốt điểm rèn luyện cần bao nhiêu điểm?",
-    "Nếu sinh viên không đạt ở một học phần, phải làm gì?",
-  ]
+  const commonQuestions = [
+    "Tôi muốn mua quà tặng sinh nhật cho vợ, shop có gợi ý gì không?",
+    "Shop còn váy đen size M không?",
+    "Có mẫu áo sơ mi nào phù hợp để đi làm không?",
+    "Tôi muốn mua giày cho chồng, làm sao để chọn size chính xác?",
+    "Shop có bán phụ kiện như túi xách hoặc ví không?",
+    "Có mẫu váy nào phù hợp cho tiệc tối không?",
+    "Shop có sản phẩm nào đang giảm giá không?",
+    "Tôi muốn đặt áo đôi, shop có mẫu nào không?",
+    "Nếu tôi mua làm quà tặng, shop có dịch vụ gói quà không?",
+    "Sản phẩm này có đủ size S, M, L không?",
+    "Tôi muốn biết giày này có màu khác ngoài màu đen không?",
+    "Mẫu váy này còn hàng tại cửa hàng không hay chỉ bán online?",
+];
+
+
   let [isLoading, SetIsLoad] = useState(false);
   let [isGen, SetIsGen] = useState(false);
   const [dataChat, SetDataChat] = useState([
     [
       "start",
       [
-        "Xin chào! Đây là NTTU Chatbot, trợ lý đắc lực dành cho bạn! Bạn muốn tìm kiếm thông tin về những gì? Đừng quên chọn nguồn tham khảo phù hợp để mình có thể giúp bạn tìm kiếm thông tin chính xác nhất nha. 😄",
+        "Xin chào! Tôi có thể giúp gì cho bạn về các sản phẩm của shop?",
         null,
       ],
     ],
@@ -166,13 +168,13 @@ function ChatBot(props) {
             <li>
               <label className="label cursor-pointer">
                 <span className="label-text font-medium">
-                  Bách khoa toàn thư Wikipedia
+                 Sendo
                 </span>
                 <input
                   type="radio"
                   name="radio-10"
-                  value={"wiki"}
-                  checked={sourceData === "wiki"}
+                  value={"sendo"}
+                  checked={sourceData === "sendo"}
                   onChange={(e) => {
                     SetSourceData(e.target.value);
                   }}
@@ -183,12 +185,12 @@ function ChatBot(props) {
             <li>
               <label className="label cursor-pointer">
                 <span className="label-text font-medium">
-                  Đại học Nguyễn Tất Thành
+                 Tiki
                 </span>
                 <input
-                  value={"nttu"}
+                  value={"tiki"}
                   type="radio"
-                  checked={sourceData === "nttu"}
+                  checked={sourceData === "tiki"}
                   onChange={(e) => {
                     SetSourceData(e.target.value);
                   }}
@@ -325,9 +327,9 @@ function ChatBot(props) {
                   {dataMessages[1][0]}
                   <>
                     <div className="divider m-0"></div>
-                    <p className="font-light text-xs text-cyan-50">
+                    <p className="font-light text-xs text-cyan-50">   
                       Tham khảo:{" "}
-                      {dataMessages[1][1] == "wiki" ? "Wikipedia" : "NTTU"}
+                      {dataMessages[1][1] == "Sendo" ? "sendo" : "tiki"}
                     </p>
                   </>
                 </div>
