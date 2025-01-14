@@ -31,10 +31,11 @@ class RAG:
         "role": "system",
         "content": (
             "Bạn tên Lan, là một người tư vấn sản phẩm cho sàn thương mại điện tử BAN. "
-            "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, ngắn gọn nhất. "
+            "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, đầy đủ nhất."
             "Hãy nhớ rằng bạn cần thể hiện sự chuyên nghiệp và tận tâm. "
             "đừng lặp lại sản phẩm đã tư vấn "
-            f"Xưng hô là 'em' và khách là anh."
+            "Trả lời bằng tiếng Việt."
+            "Xưng hô là 'em' và khách là anh."
         )
     }
 ]
@@ -116,12 +117,12 @@ class RAG:
             }
         },
         {
-            '$limit': 10
+            '$limit': 5
         }]
         results = list(self.collection.aggregate(pipeline))
         return results
     
-    def hybrid_search(self, query):
+    def hybrid_search(self, query,k):
         """
         Perform a hybrid search combining vector search and full-text search using Reciprocal Rank Fusion (RRF).
 
@@ -165,7 +166,7 @@ class RAG:
                     final_results.append(result)
                     break
 
-        return final_results
+        return final_results[:k]
     def create_prompt(self,search_results,query):
         """
         Create a prompt from search results.
@@ -242,7 +243,6 @@ class RAG:
                 if (role is None or msg["role"] == role) and (content is None or msg["content"] == content):
                     self.chat_history.pop(i)
                     break
-        return self.chat_history
     def remove_history(self):
         """
         Remove all messages from the conversation history.
@@ -255,11 +255,10 @@ class RAG:
         "role": "system",
         "content": (
             "Bạn tên Lan, là một người tư vấn sản phẩm cho sàn thương mại điện tử BAN. "
-            "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, gồm tên, giá và mô tả sơ bộ của sản phẩm. "
+            "Dựa vào thông tin được cung cấp từ hệ thống và câu hỏi của khách hàng, bạn sẽ đưa ra câu trả lời tốt nhất, đầy đủ nhất. "
             "Hãy nhớ rằng bạn cần thể hiện sự chuyên nghiệp và tận tâm. "
             "đừng lặp lại sản phẩm đã tư vấn "
-            "nếu khách hỏi về hàng hóa thì hãy trả lời, còn không thì bạn hãy nói kiến thức của bạn chỉ dành cho tư vấn khách hàng về những sản phẩm"
-            f"Xưng hô là 'em' và khách là anh."
+            "Xưng hô là 'em' và khách là anh."
         )
     }
 ]
@@ -296,14 +295,14 @@ class RAG:
         text = text.replace('•', '  *')
         return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 if __name__ == '__main__':
-    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
+    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
     mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
     db_name = "product"
     collection_name = "sendo"
     client = GetCollection(mongodb_uri, db_name, collection_name)
     collection=client.get_collection()
     rag=RAG(collection=collection,llm_model=llm)
-    query='quà tặng sinh nhật bạn gái thanh thiếu niên, dễ thương, da trắng'
+    query='đầm đen'
     #print(query)
     search_result=rag.vector_search(query=query)
     # for item in search_result:

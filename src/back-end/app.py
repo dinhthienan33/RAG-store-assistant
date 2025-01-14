@@ -50,25 +50,25 @@ def chatbot_response(query, rag):
     click_count = len(chat_history) // 2
     product_keywords = ['tìm','gợi ý','tư vấn']
     search_result = []  # Initialize to avoid potential UnboundLocalError
-    prompt = "đây là một câu."
+    prompt = ""
 
     # Determine the route
     route = check_route(query)
-    if route == "chitchat" or (route is None and click_count != 0) or  not check_keywords(query, product_keywords):
+    if (route == "chitchat" or route is None) and not check_keywords(query, product_keywords):
         return "Xin lỗi, tôi chỉ trả lời các câu hỏi liên quan đến shop BAN.", []
-
-    if click_count == 0 or check_keywords(query, product_keywords):
-        search_result = rag.full_text_search(query=query)
+    
+    if check_keywords(query, product_keywords) or click_count == 0:
+        search_result = rag.hybrid_search(query=query,k=10)
         prompt = rag.create_prompt(search_results=search_result, query=query)
     else:
         prompt = query
-
-    if click_count > 3:
-        rag.remove_message()
-
     rag.update_history(role='user', content=prompt)
     response = rag.answer_query()
-    
+    print(len(rag.get_history()))
+    if click_count >= 3:
+        for _ in range(2):
+            rag.remove_message()
+    print(len(rag.get_history()))
     return response, search_result
 
 # FastAPI application setup
@@ -87,7 +87,7 @@ app.add_middleware(
 def startup_event():
     global global_rag
     global_rag = initialize_rag(
-        api_key='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',
+        api_key='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',
         mongodb_uri='mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs'
     )
 
@@ -110,7 +110,9 @@ async def read_item(q: str | None = None):
             rag=global_rag,
             query=q,
         )
-        
+        # for result in search_result:
+        #     print(result['name'])
+        #print(search_result)
         return {
             "result": result,
             "sources": search_result

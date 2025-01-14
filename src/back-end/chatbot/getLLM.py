@@ -37,8 +37,8 @@ class GetLLM:
 
 
 
-if __name__ == "__test__":
-    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
+if __name__ == "__main__":
+    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
     prompt_structure = [
         {
             "role": "system",
