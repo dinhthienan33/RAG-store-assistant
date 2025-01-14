@@ -55,7 +55,7 @@ def chatbot_response(query, rag):
     # Determine the route
     route = check_route(query)
     if route == "chitchat" or (route is None and click_count != 0) or  not check_keywords(query, product_keywords):
-        return "Xin lỗi, tôi chỉ trả lời các câu hỏi liên quan đến sản phẩm sàn thương mại điện tử AnhLong.", []
+        return "Xin lỗi, tôi chỉ trả lời các câu hỏi liên quan đến shop BAN.", []
 
     if click_count == 0 or check_keywords(query, product_keywords):
         search_result = rag.full_text_search(query=query)
@@ -93,7 +93,7 @@ def startup_event():
 
 @app.get("/")
 def read_root():
-    return {"message": "Shop AnhLong"}
+    return {"message": "Shop BAN"}
 
 @app.get("/rag/")
 async def read_item(q: str | None = None):
