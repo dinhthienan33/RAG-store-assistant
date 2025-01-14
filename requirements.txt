@@ -1,5 +1,6 @@
 pydantic
 streamlit
+groq
 pandas
 typing
 pymongo
@@ -8,3 +9,6 @@ ipython
 sentence-transformers
 gradio
 semantic_router
+uvicorn
+fastapi
+pyvi

@@ -14,17 +14,18 @@ function ChatBot(props) {
 
   const commonQuestions = [
     "Tôi muốn mua quà tặng sinh nhật cho vợ, shop có gợi ý gì không?",
-    "Shop còn váy đen size M không?",
-    "Có mẫu áo sơ mi nào phù hợp để đi làm không?",
+    "Shop còn váy đen không?",
+    "Tư vấn cho tôi vài mẫu áo sơ mi phù hợp để đi làm?",
+    "Shop có thể tư vấn giúp tôi cách bảo quản áo len để không bị giãn hay xù lông không?",
     "Tôi muốn mua giày cho chồng, làm sao để chọn size chính xác?",
     "Shop có bán phụ kiện như túi xách hoặc ví không?",
     "Có mẫu váy nào phù hợp cho tiệc tối không?",
-    "Shop có sản phẩm nào đang giảm giá không?",
-    "Tôi muốn đặt áo đôi, shop có mẫu nào không?",
-    "Nếu tôi mua làm quà tặng, shop có dịch vụ gói quà không?",
-    "Sản phẩm này có đủ size S, M, L không?",
+    "Shop có thể gợi ý quần áo phù hợp cho người dáng gầy không?",
+    "Tôi chuẩn bị đi du lịch châu Âu vào cuối năm, shop có thể gợi ý một set đồ ấm áp không?",
+    "Shop có bán quần legging không? Giá rẻ nhất là bao nhiêu?",
+    "Tôi đang tìm một chiếc váy dạ hội cho buổi tiệc sang trọng, yêu cầu là màu xanh dương, dáng ôm, nhưng không hở quá nhiều. Tôi cao 1m65, nặng 55kg, vòng eo 65cm. Gợi ý cho tôi vài mẫu phù hợp.",
     "Tôi muốn biết giày này có màu khác ngoài màu đen không?",
-    "Mẫu váy này còn hàng tại cửa hàng không hay chỉ bán online?",
+    "Shop có thể gợi ý trang phục phù hợp cho tiệc cưới ban ngày không? Tôi muốn mặc màu pastel.",
 ];
 
 
@@ -34,7 +35,7 @@ function ChatBot(props) {
     [
       "start",
       [
-        "Xin chào! Tôi có thể giúp gì cho bạn về các sản phẩm của shop?",
+        "Xin chào! Tôi có thể giúp gì cho bạn về các sản phẩm của shop BAN?",
         null,
       ],
     ],
@@ -328,8 +329,7 @@ function ChatBot(props) {
                   <>
                     <div className="divider m-0"></div>
                     <p className="font-light text-xs text-cyan-50">   
-                      Tham khảo:{" "}
-                      {dataMessages[1][1] == "Sendo" ? "sendo" : "tiki"}
+                      Tham khảo:{"Sendo"}
                     </p>
                   </>
                 </div>
