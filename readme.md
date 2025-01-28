@@ -1,5 +1,6 @@
 # RAG Store Assistant
-
+## Homepage
+![](homepage/cartmate.png)
 ## Introduction
 RAG Store Assistant is an intelligent chatbot system designed to assist users in searching for products, answering FAQs, and providing personalized recommendations. Built on the **RAG (Retrieval-Augmented Generation)** model, the system combines **Hybrid Search** (Semantic Search + Keyword Search) for efficient information retrieval and **Gemini-1.5-flash** for natural language generation. The backend is powered by **FastAPI**, while the frontend is built using **Node.js**. The system is containerized using **Docker** for easy deployment and scalability.
 
