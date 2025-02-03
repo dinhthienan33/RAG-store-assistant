@@ -9,6 +9,9 @@ from samples import product, chitchat
 from semantic_router.encoders import HuggingFaceEncoder
 from semantic_router.routers import SemanticRouter
 import re
+import dotenv
+import os
+
 
 # Global variable to hold the RAG instance
 global_rag = None
@@ -82,13 +85,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# Load environment variables from .env file
+env = dotenv.dotenv_values(".env")
+mongodb_uri= env.get("MONGODB_URI")
+api_key = env.get("GROQ_KEY")
 
 @app.on_event("startup")
 def startup_event():
     global global_rag
     global_rag = initialize_rag(
-        api_key='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',
-        mongodb_uri='mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs'
+        api_key=api_key,
+        mongodb_uri=mongodb_uri
     )
 
 @app.get("/")
