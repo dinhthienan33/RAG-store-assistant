@@ -48,11 +48,3 @@ def chatbot_response(chat_history, query, rag):
     rag.update_history(role='user', content=prompt)
     response = rag.answer_query()
     return response
-
-if __name__ == '__main__':
-    rag= initialize_rag(mongodb_uri="mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs",
-                   api_key= "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")
-    
-    chat_history = []
-    query="sản phẩm đầm đen"
-    print(chatbot_response(chat_history, query, rag))

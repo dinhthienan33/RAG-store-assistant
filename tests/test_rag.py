@@ -1,4 +1,5 @@
 from getClient.core import RAG
+import dotenv
 # MongoDB connection details
 
 db_name = "product"
@@ -8,8 +9,11 @@ db_collection = "sendo"
 llm_name = "llama-3.1-8b-instant"
 embedding_name = "dangvantuan/vietnamese-embedding"
 # Initialize history
-mongodb_uri = 'mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs'
-api_key = "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"
+# Load environment variables from .env file
+env = dotenv.dotenv_values(".env")
+mongodb_uri= env.get("MONGODB_URI")
+api_key = env.get("GROQ_KEY")
+
 history = [
     {
         "role": "system",
