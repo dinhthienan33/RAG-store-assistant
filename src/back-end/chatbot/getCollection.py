@@ -42,7 +42,11 @@ class GetCollection:
             print(f"Error retrieving collection: {e}")
             return None
 if __name__ == "__test__":
-    mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
+    # Load environment variables from .env file
+    env = dotenv.dotenv_values(".env")
+    mongodb_uri= env.get("MONGODB_URI")
+    api_key = env.get("GEMINI_KEY")
+    mongodb_uri = "mongo"
     db_name = "product"
     collection_name = "sendo"
     client = GetCollection(mongodb_uri, db_name, collection_name)

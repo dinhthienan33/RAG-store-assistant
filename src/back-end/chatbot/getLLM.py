@@ -38,7 +38,10 @@ class GetLLM:
 
 
 if __name__ == "__main__":
-    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
+    # Load environment variables from .env file
+    env = dotenv.dotenv_values(".env")
+    api_key = env.get("GEMINI_KEY")
+    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = api_key)
     prompt_structure = [
         {
             "role": "system",

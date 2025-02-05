@@ -56,7 +56,10 @@ class CSVToMongoDB:
 
 # Example usage
 if __name__ == "__main__":
-    mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
+    # Load environment variables from .env file
+    import dotenv
+    env = dotenv.dotenv_values(".env")
+    mongodb_uri= env.get("MONGODB_URI")
     db_name = "product"
     collection_name = "sendo"
     # csv_file_path = "lastoflast.csv"

@@ -16,6 +16,11 @@ import os
 # Global variable to hold the RAG instance
 global_rag = None
 
+# Load environment variables from .env file
+env = dotenv.dotenv_values(".env")
+mongodb_uri= env.get("MONGODB_URI")
+api_key = env.get("GROQ_KEY")
+
 def initialize_rag(api_key, mongodb_uri):
     llm = GetLLM(
         llm_name='llama-3.1-8b-instant',
@@ -85,10 +90,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# Load environment variables from .env file
-env = dotenv.dotenv_values(".env")
-mongodb_uri= env.get("MONGODB_URI")
-api_key = env.get("GROQ_KEY")
 
 @app.on_event("startup")
 def startup_event():

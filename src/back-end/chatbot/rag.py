@@ -295,8 +295,11 @@ class RAG:
         text = text.replace('•', '  *')
         return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 if __name__ == '__main__':
-    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = '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')
-    mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
+    # Load environment variables from .env file
+    env = dotenv.dotenv_values(".env")
+    mongodb_uri= env.get("MONGODB_URI")
+    api_key = env.get("GEMINI_KEY")
+    llm= GetLLM(llm_name='llama-3.1-8b-instant',api_key = api_key)
     db_name = "product"
     collection_name = "sendo"
     client = GetCollection(mongodb_uri, db_name, collection_name)

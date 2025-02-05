@@ -96,9 +96,11 @@ class SearchAgent():
         results =collection.aggregate(pipeline)
         return results
 if __name__ == '__test__':
-    api_key = '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'
+    # Load environment variables from .env file
+    env = dotenv.dotenv_values(".env")
+    mongodb_uri= env.get("MONGODB_URI")
+    api_key = env.get("GEMINI_KEY")
     llm= Groq(api_key=api_key)
-    mongodb_uri = "mongodb+srv://andt:snn5T*6fFP5P5zt@jobs.utyvo.mongodb.net/?retryWrites=true&w=majority&appName=jobs"
     db_name = "product"
     collection_name = "sendo"
     client=MongoClient(mongodb_uri)
